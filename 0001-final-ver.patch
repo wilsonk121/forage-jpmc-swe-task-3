@@ -1,0 +1,41 @@
+From 2fed89fe43787c0863b2851d3e258ebc4211d74b Mon Sep 17 00:00:00 2001
+From: wilsonk121 <wilsonlj@connect.hku.hk>
+Date: Tue, 29 Aug 2023 13:30:59 +0800
+Subject: [PATCH] final ver
+
+---
+ src/DataManipulator.ts | 4 ++--
+ src/Graph.tsx          | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/DataManipulator.ts b/src/DataManipulator.ts
+index 697394c..526acf8 100644
+--- a/src/DataManipulator.ts
++++ b/src/DataManipulator.ts
+@@ -16,8 +16,8 @@ export class DataManipulator {
+   const priceABC=(serverResponds[0].top_ask.price+serverResponds[0].top_bid.price) / 2;
+   const priceDEF=(serverResponds[1].top_ask.price+serverResponds[1].top_bid.price) / 2;
+   const ratio = priceABC/priceDEF
+-  const upperBound= 1+0.10;
+-  const lowerBound= 1-0.10;
++  const upperBound= 1+0.01;
++  const lowerBound= 1-0.01;
+     return {
+        price_abc:priceABC,
+        price_def:priceDEF,
+diff --git a/src/Graph.tsx b/src/Graph.tsx
+index 9c7fcbf..9f1009c 100644
+--- a/src/Graph.tsx
++++ b/src/Graph.tsx
+@@ -40,7 +40,7 @@ class Graph extends Component<IProps, {}> {
+       elem.load(this.table);
+       elem.setAttribute('view', 'y_line');
+       elem.setAttribute('row-pivots', '["timestamp"]');
+-      elem.setAttribute('columns', '["top_ask_price"]');
++      elem.setAttribute('columns', '["ratio","lower_bound","upper_bound","trigger_alert"]');
+       elem.setAttribute('aggregates', JSON.stringify({
+       price_abc:'avg',
+       price_def:'avg',
+-- 
+2.35.2.windows.1
+
